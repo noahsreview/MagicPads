@@ -6,6 +6,7 @@ import logging
 import argparse
 import PadParse as parse
 import TestMode as test
+from pygame import time as t
 
 parser = argparse.ArgumentParser(description='MagicPads: a python script that is used to control MagicQ over OSC by using launchpads')
 parser.add_argument('-t', "--test", required=False, default=False, type=bool, help='Testing Mode: will do various testing patterns on the launchpad')
@@ -26,7 +27,16 @@ def main():
 
     
     # Display an 8x8 PNG image on the central 8x8 grid
-    parse.display_image_on_launchpad(lp, "your_image.png")  # Change "your_image.png" to your actual image file
+    parse.display_image_on_launchpad(lp, "images/N.png")  # Change "your_image.png" to your actual image file
+    t.wait(1000)
+    parse.display_image_on_launchpad(lp, "images/P.png")  # Change "your_image.png" to your actual image file
+    t.wait(1000)
+    parse.display_image_on_launchpad(lp, "images/L.png")  # Change "your_image.png" to your actual image file
+    t.wait(1000)
+    parse.display_image_on_launchpad(lp, "images/X.png")  # Change "your_image.png" to your actual image file
+    t.wait(2500)
+    parse.display_image_on_launchpad(lp, "your_image.png")
+
 
     try:
         print("\nListening for button presses...")
