@@ -12,10 +12,12 @@ port = "8000"
 execPage = "3"
 execItem = "0"
 
+
 def receive_OSC_Info(Host, Port, ExecPage):
     host = Host
     port = Port
     execPage = ExecPage
+    
 
 def image_to_launchpad_colors(image_path):
     """Convert an 8x8 PNG image into a list of RGB values."""

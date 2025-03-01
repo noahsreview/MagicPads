@@ -36,13 +36,17 @@ def read_config():
     tx_osc_port =  config.getint('Networking & Chamsys Settings', 'tx_osc_port')
     osc_ip =  config.get('Networking & Chamsys Settings', 'osc_ip')
     executor_page =  config.get('Networking & Chamsys Settings', 'executor_page')
+    start_logo =  config.getboolean('General', 'start_logo')
+
+    print(debug_mode, start_logo)
 
     config_values = {
         'debug_mode' : debug_mode,
         'log_level' : log_level,
         'tx_osc_port' : tx_osc_port,
         'osc_ip' : osc_ip,
-        'executor_page' : executor_page
+        'executor_page' : executor_page,
+        'start_logo' : start_logo
     }
 
     return config_values
@@ -58,19 +62,21 @@ def main():
 
     logging.info("Launchpad connected successfully! Please make sure to set it to live mode.")
     
-
-    
-    # Display an 8x8 PNG image on the central 8x8 grid
     oscManager.sendOSC(3, 1)
-    parse.display_image_on_launchpad(lp, "images/N.png")  # Change "your_image.png" to your actual image file
-    t.wait(1000)
-    parse.display_image_on_launchpad(lp, "images/P.png")  # Change "your_image.png" to your actual image file
-    t.wait(1000)
-    parse.display_image_on_launchpad(lp, "images/L.png")  # Change "your_image.png" to your actual image file
-    t.wait(1000)
-    parse.display_image_on_launchpad(lp, "images/X.png")  # Change "your_image.png" to your actual image file
-    t.wait(2500)
+
+    if(read_config()["start_logo"]):
+        # Display an 8x8 PNG image on the central 8x8 grid
+        parse.display_image_on_launchpad(lp, "images/N.png")  # Change "your_image.png" to your actual image file
+        t.wait(1000)
+        parse.display_image_on_launchpad(lp, "images/P.png")  # Change "your_image.png" to your actual image file
+        t.wait(1000)
+        parse.display_image_on_launchpad(lp, "images/L.png")  # Change "your_image.png" to your actual image file
+        t.wait(1000)
+        parse.display_image_on_launchpad(lp, "images/X.png")  # Change "your_image.png" to your actual image file
+        t.wait(2500)
     parse.display_image_on_launchpad(lp, "your_image.png")
+    
+    
 
 
     try:
